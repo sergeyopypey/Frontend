@@ -15,6 +15,7 @@
 
     <div>
         <button onclick="getUsers()">Get Users</button>
+        <button onclick="postLicense()">Load License</button>
     </div>
 
 <script type="text/javascript" src="/Frontend.e31bb0bc.js"></script>
@@ -70,6 +71,60 @@ function _getUsers() {
     }, _callee);
   }));
   return _getUsers.apply(this, arguments);
+}
+var license = {
+  title: "License",
+  lic_number: "333223",
+  author: "LeonovWeb",
+  lic_owner: "TroshinWeb",
+  inspired_date: "31/12/2022",
+  recieved_date: "01/01/2022",
+  user_id: null
+};
+function postLicense() {
+  return _postLicense.apply(this, arguments);
+}
+function _postLicense() {
+  _postLicense = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var response, json;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            url = 'http://localhost:8888/api/license';
+            _context2.next = 3;
+            return fetch(url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+              },
+              body: JSON.stringify(license)
+            });
+          case 3:
+            response = _context2.sent;
+            if (!response.ok) {
+              _context2.next = 11;
+              break;
+            }
+            _context2.next = 7;
+            return response.json();
+          case 7:
+            json = _context2.sent;
+            console.log(json);
+            _context2.next = 12;
+            break;
+          case 11:
+            alert("Ошибка HTTP: " + response.status);
+          case 12:
+            alert('Success!!!!!!!!');
+          case 13:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _postLicense.apply(this, arguments);
 }</script>
 </body>
 </html>
