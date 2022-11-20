@@ -10,48 +10,68 @@
 <body>
 
     <div>
-        <h2>Hello!</h2>
-    </div>
-
+        <h2>САП ГИ</h2>
+    </div>    
     <div>
-        <button onclick="getUsers()">Get Users</button>
-        <button onclick="postLicense()">Load License</button>
+        <ul>
+            <li>
+              <label for="summary">Название:</label>
+              <input type="text" id="title" name="title" />
+            </li>
+            <li>
+                <label for="summary">Номер Лицензии</label>
+                <input type="number" id="lic_number" name="lic_number" />
+              </li>
+              <li>
+                <label for="summary">Выдающий лицензию</label>
+                <input type="text" id="author" name="author" />
+              </li>
+              <li>
+                <label for="summary">Владелец лицензии</label>
+                <input type="text" id="lic_owner" name="lic_owner" />
+              </li>
+              <li>
+                <label for="summary">Дата истечения:</label>
+                <input type="date" id="inspired_date" name="inspired_date" />
+              </li>
+              <li>
+                <label for="summary">Дата получения:</label>
+                <input type="date" id="recieved_date" name="recieved_date" />
+              </li>
+              <li>
+                <label for="summary">Пользователь:</label>
+                <input type="number" id="user_id" name="user_id" />
+              </li>
+            <li class="button">
+              <button onclick="sendLicense()">Отправить информацию о лицензии</button>
+            </li>
+          </ul>
     </div>
 
 <script type="text/javascript" src="index.js"></script>
 <script>
-    const obj = {
-    name: "Sergey",
-    surname: "Troshin"
-    }
-    async function getUsers() {
-        url = 'http://localhost:8888/api/user'
-        let response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-            body: JSON.stringify(obj)
-        })
-        if (response.ok) {
-            let json = await response.json();
-            console.log(json)
-        } else alert("Ошибка HTTP: " + response.status)
-
-        alert('Success!!!!!!!!')
-    }
-
-    const license = {
-        title: "License",
-        lic_number: "333223",
-        author: "LeonovWeb",
-        lic_owner: "TroshinWeb",
-        inspired_date: "31/12/2022",
-        recieved_date: "01/01/2022",
-        user_id: null
+    function sendLicense() {
+        let title = document.getElementById('title')
+        let lic_number = document.getElementById('lic_number')
+        let author = document.getElementById('author')
+        let lic_owner = document.getElementById('lic_owner')
+        let inspired_date = document.getElementById('inspired_date')
+        let recieved_date = document.getElementById('recieved_date')
+        let user_id = document.getElementById('user_id')
+        const license = {
+            title: title.value,
+            lic_number: lic_number.value,
+            author: author.value,
+            lic_owner: lic_owner.value,
+            inspired_date: inspired_date.value.toString(),
+            recieved_date: recieved_date.value.toString(),
+            user_id: 12
+        }
+        console.log(JSON.stringify(license))
+        postLicense(license)
     }
 
-    async function postLicense() {
+    async function postLicense(license) {
         url = 'http://localhost:8888/api/license'
         let response = await fetch(url, {
             method: 'POST',
@@ -65,7 +85,7 @@
             console.log(json)
         } else alert("Ошибка HTTP: " + response.status)
 
-        alert('Success!!!!!!!!')
+        alert('Success!')
     }
 </script>
 </body>
