@@ -1,4 +1,4 @@
-alert('Server is workong')
+
 
 const obj = {
   name: "Sergey",

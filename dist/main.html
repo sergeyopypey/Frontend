@@ -47,6 +47,20 @@
             </li>
           </ul>
     </div>
+    <button onclick="getLicenses()">Получить список лицензий</button>
+    <div class="table">
+        <table id="table">
+            <tr>
+                <th>Название</th>
+                <th>Номер лицензии</th>
+                <th>Выдающий лицензию</th>
+                <th>Владелец лицензии</th>
+                <th>Дата истечения</th>
+                <th>Дата получения</th>
+                <th>Пользователь</th>
+            </tr>
+        </table>
+    </div>
 
 <script type="text/javascript" src="/Frontend.e31bb0bc.js"></script>
 <script>function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -72,6 +86,9 @@ function sendLicense() {
   };
   console.log(JSON.stringify(license));
   postLicense(license);
+}
+function toHTML(json) {
+  return "\n                <tr>\n                    <th>".concat(json.title, "</th>\n                    <th>").concat(json.lic_number, "</th>\n                    <th>").concat(json.author, "</th>\n                    <th>").concat(json.lic_owner, "</th>\n                    <th>").concat(json.inspired_date, "</th>\n                    <th>").concat(json.recieved_date, "</th>\n                    <th>").concat(json.user_id, "</th>\n                </tr>");
 }
 function postLicense(_x) {
   return _postLicense.apply(this, arguments);
@@ -108,7 +125,7 @@ function _postLicense() {
           case 11:
             alert("Ошибка HTTP: " + response.status);
           case 12:
-            alert('Success!');
+            alert('Data sent!');
           case 13:
           case "end":
             return _context.stop();
@@ -117,6 +134,55 @@ function _postLicense() {
     }, _callee);
   }));
   return _postLicense.apply(this, arguments);
+}
+function getLicenses() {
+  return _getLicenses.apply(this, arguments);
+}
+function _getLicenses() {
+  _getLicenses = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var response, json, $site, i;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            url = 'http://localhost:8888/api/license';
+            _context2.next = 3;
+            return fetch(url, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+              }
+            });
+          case 3:
+            response = _context2.sent;
+            if (!response.ok) {
+              _context2.next = 14;
+              break;
+            }
+            _context2.next = 7;
+            return response.json();
+          case 7:
+            json = _context2.sent;
+            console.log(json);
+            json_size = json.length;
+            $site = document.querySelector('#table');
+            for (i = 0; i < json_size; i++) {
+              $site.insertAdjacentHTML('beforeend', toHTML(json[i]));
+            }
+            _context2.next = 15;
+            break;
+          case 14:
+            alert("Ошибка HTTP: " + response.status);
+          case 15:
+            alert('Data recieved!');
+          case 16:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _getLicenses.apply(this, arguments);
 }</script>
 </body>
 </html>
