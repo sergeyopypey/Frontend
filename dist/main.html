@@ -4,64 +4,88 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>САП ГИ</title>
+    <title>СИП ГИ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <style>table, th, td {
+        border: 1px solid black;
+        text-align: center;
+      }
+      p     { display: table-row;  }
+      label { display: table-cell; }
+      input { 
+        display: table-cell;
+        width: 300px;
+      }
+      .grid {
+        display: grid;
+        gap: 1rem;
+        grid-auto-flow: column;
+        margin: 0 0 1rem 0;
+      }
+      .form {
+        margin-left: 10px;
+      }</style>
 </head>
 <body>
-    <button id="sayHello">Say Hello!</button>
-    <div>
-        <h2>САП ГИ</h2>
-    </div>    
-    <div>
-        <ul>
-            <li>
-              <label for="summary">Название:</label>
-              <input type="text" id="title" name="title">
-            </li>
-            <li>
-                <label for="summary">Номер Лицензии</label>
-                <input type="number" id="lic_number" name="lic_number">
-              </li>
-              <li>
-                <label for="summary">Выдающий лицензию</label>
-                <input type="text" id="author" name="author">
-              </li>
-              <li>
-                <label for="summary">Владелец лицензии</label>
-                <input type="text" id="lic_owner" name="lic_owner">
-              </li>
-              <li>
-                <label for="summary">Дата истечения:</label>
-                <input type="date" id="inspired_date" name="inspired_date">
-              </li>
-              <li>
-                <label for="summary">Дата получения:</label>
-                <input type="date" id="recieved_date" name="recieved_date">
-              </li>
-              <li>
-                <label for="summary">Пользователь:</label>
-                <input type="number" id="user_id" name="user_id">
-              </li>
-            <li class="button">
-              <button id="sendLicense">Отправить информацию о лицензии</button>
-            </li>
-          </ul>
+    <div style="margin-left: 10px;">
+      <h2>СИП ГИ</h2>
     </div>
-    <button id="getLicenses">Получить список лицензий</button>
-    <div class="table">
-        <table id="table">
-            <tr>
-                <th>Название</th>
-                <th>Номер лицензии</th>
-                <th>Выдающий лицензию</th>
-                <th>Владелец лицензии</th>
-                <th>Дата истечения</th>
-                <th>Дата получения</th>
-                <th>Пользователь</th>
-            </tr>
-        </table>
+    <button style="margin-left: 10px;" id="testButton">Тестовая кнопка</button> 
+    <div class="grid">
+      <div class="form">
+        <form>
+          <p>
+            <label for="summary">Название:</label>
+            <input type="text" id="title"><br>
+          </p>
+          <p>
+            <label for="summary">Номер лицензии:</label>
+            <input type="number" id="lic_number"><br>
+          </p>
+          <p>
+            <label for="summary">Выдающий лицензию:</label>
+            <input type="text" id="author"><br>
+          </p>
+          <p>
+            <label for="summary">Владелец лицензии:</label>
+            <input type="text" id="lic_owner"><br>
+          </p>
+          <p>
+            <label for="summary">Дата истечения:</label>
+            <input type="date" id="inspired_date"><br>
+          </p>
+          <p>
+            <label for="summary">Дата получения:</label>
+            <input type="date" id="recieved_date"><br>
+          </p>
+        </form>
+        <button style="margin-top: 5px; width: 464px;" id="sendLicense">Отправить информацию о лицензии</button><br>
+      </div>
+      <div>
+        <button id="deleteLicense">Удалить лицензию с ID-шником:</button>
+        <input type="number" id="lic_id"><br>
+        <textarea style="margin-top: 7px; resize: none;" id="add_information" cols="73" rows="7"></textarea>
+      </div>
+    </div>   
+    <div>
+      <button style="margin-left: 10px;" id="getLicenses">Получить список лицензий</button>
+      <button id="cleanTable">Очистить таблицу</button>
+      <table style="margin-top: 10px;" class="container-fluid" id="table">
+        <tr>
+          <th>ID</th>
+          <th>Название</th>
+          <th>Номер лицензии</th>
+          <th>Выдающий лицензию</th>
+          <th>Владелец лицензии</th>
+          <th>Дата истечения</th>
+          <th>Дата получения</th>
+          <th>Время действия</th>
+          <th>Пользователь</th>
+          <th>Файл</th>
+        </tr>
+      </table>
     </div>
-
+<h6 style="text-align: center; margin: 300px 0px 10px 0px;">Developed by Troshin Sergey</h6>
 <script type="text/javascript" src="/Frontend.e31bb0bc.js"></script>
 </body>
 </html>
