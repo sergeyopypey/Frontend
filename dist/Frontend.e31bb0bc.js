@@ -213,7 +213,7 @@ function _postLicense() {
   return _postLicense.apply(this, arguments);
 }
 function toHTML(json, days) {
-  return "\n            <tr>\n                <th>".concat(json.id, "</th>\n                <td>").concat(json.title, "</td>\n                <td>").concat(json.lic_number, "</td>\n                <td>").concat(json.author, "</td>\n                <td>").concat(json.lic_owner, "</td>\n                <td>").concat(json.inspired_date.split('T')[0], "</td>\n                <td>").concat(json.recieved_date.split('T')[0], "</td>\n                <td>").concat(Math.floor(days), " \u0434\u043D\u0435\u0439</td>\n                <td>").concat(json.user_id, "</td>\n                <td><input type=\"file\" id=\"avatar_").concat(json.id, "\" accept=\"image/png, image/jpeg\"></td>\n            </tr>");
+  return "\n            <tr>\n                <th>".concat(json.id, "</th>\n                <td>").concat(json.title, "</td>\n                <td>").concat(json.lic_number, "</td>\n                <td>").concat(json.author, "</td>\n                <td>").concat(json.lic_owner, "</td>\n                <td>").concat(json.inspired_date.split('T')[0], "</td>\n                <td>").concat(json.recieved_date.split('T')[0], "</td>\n                <td>").concat(Math.floor(days), " \u0434\u043D\u0435\u0439</td>\n                <td>").concat(json.user_id, "</td>\n                <td><input type=\"file\" id=\"avatar_").concat(json.id, "\" title=\" \" accept=\"image/png, image/jpeg\"></td>\n            </tr>");
 }
 function getLicenses() {
   return _getLicenses.apply(this, arguments);
@@ -340,7 +340,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56683" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61133" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

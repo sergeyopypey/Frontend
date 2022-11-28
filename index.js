@@ -80,7 +80,7 @@ function toHTML(json, days) {
                 <td>${json.recieved_date.split('T')[0]}</td>
                 <td>${Math.floor(days)} дней</td>
                 <td>${json.user_id}</td>
-                <td><input type="file" id="avatar_${json.id}" accept="image/png, image/jpeg"></td>
+                <td><input type="file" id="avatar_${json.id}" title=" " accept="image/png, image/jpeg"></td>
             </tr>`
 }
 

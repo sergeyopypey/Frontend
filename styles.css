@@ -1,0 +1,19 @@
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+  }
+  p     { display: table-row;  }
+  label { display: table-cell; }
+  input { 
+    display: table-cell;
+    width: 300px;
+  }
+  .grid {
+    display: grid;
+    gap: 1rem;
+    grid-auto-flow: column;
+    margin: 0 0 1rem 0;
+  }
+  .form {
+    margin-left: 10px;
+  }
