@@ -124,13 +124,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.cleanTable = cleanTable;
-exports.insertText = insertText;
 exports.toHTML = toHTML;
-function insertText(text) {
-  document.getElementById("add_information").innerHTML += "".concat(text, "\n");
-}
-function toHTML(json, days) {
-  return "\n            <tr>\n                <th>".concat(json.id, "</th>\n                <td>").concat(json.title, "</td>\n                <td>").concat(json.lic_number, "</td>\n                <td>").concat(json.author, "</td>\n                <td>").concat(json.lic_owner, "</td>\n                <td>").concat(json.inspired_date.split('T')[0], "</td>\n                <td>").concat(json.recieved_date.split('T')[0], "</td>\n                <td>").concat(Math.floor(days), " \u0434\u043D\u0435\u0439</td>\n                <td>").concat(json.user_id, "</td>\n                <td><input type=\"file\" id=\"avatar_").concat(json.id, "\" title=\" \" accept=\"image/png, image/jpeg\"></td>\n            </tr>");
+function toHTML(json) {
+  var days = (Date.parse(json.inspired_date) - Date.now()) / (1000 * 60 * 60 * 24);
+  var inspired_date = new Date(json.inspired_date);
+  var recieved_date = new Date(json.recieved_date);
+  return "\n            <tr>\n                <th>".concat(json.id, "</th>\n                <td>").concat(json.title, "</td>\n                <td>").concat(json.lic_number, "</td>\n                <td>").concat(json.author, "</td>\n                <td>").concat(json.lic_owner, "</td>\n                <td>").concat(inspired_date.toLocaleDateString(), "</td>\n                <td>").concat(recieved_date.toLocaleDateString(), "</td>\n                <td>").concat(Math.floor(days), " \u0434\u043D\u0435\u0439</td>\n                <td>").concat(json.user_id, "</td>\n                <td><input type=\"file\" id=\"avatar_").concat(json.id, "\" title=\" \" accept=\"image/png, image/jpeg\"></td>\n            </tr>");
 }
 function cleanTable() {
   var list = document.getElementById("table");
@@ -177,9 +176,16 @@ function _sendLicense() {
               recieved_date: recieved_date.value.toString(),
               user_id: 12
             };
+            if (title.value, lic_number.value, author.value, lic_owner.value, inspired_date.value, recieved_date.value) {
+              _context.next = 10;
+              break;
+            }
+            alert('Заполните все поля!');
+            return _context.abrupt("return");
+          case 10:
             console.log(JSON.stringify(license));
             url = 'http://localhost:8888/api/license';
-            _context.next = 11;
+            _context.next = 14;
             return fetch(url, {
               method: 'POST',
               headers: {
@@ -187,23 +193,23 @@ function _sendLicense() {
               },
               body: JSON.stringify(license)
             });
-          case 11:
+          case 14:
             response = _context.sent;
             if (!response.ok) {
-              _context.next = 20;
+              _context.next = 23;
               break;
             }
-            _context.next = 15;
+            _context.next = 18;
             return response.json();
-          case 15:
+          case 18:
             json = _context.sent;
             console.log(json);
             alert('Data sent!');
-            _context.next = 21;
+            _context.next = 24;
             break;
-          case 20:
+          case 23:
             alert("Ошибка HTTP: " + response.status);
-          case 21:
+          case 24:
           case "end":
             return _context.stop();
         }
@@ -217,7 +223,7 @@ function getLicenses() {
 }
 function _getLicenses() {
   _getLicenses = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-    var url, response, json, json_size, $site, i, date_dif_milliseconds, date_dif_days;
+    var url, response, json, json_size, $site, i;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -233,7 +239,7 @@ function _getLicenses() {
           case 3:
             response = _context2.sent;
             if (!response.ok) {
-              _context2.next = 17;
+              _context2.next = 16;
               break;
             }
             _context2.next = 7;
@@ -244,21 +250,15 @@ function _getLicenses() {
             json_size = json.length;
             $site = document.querySelector('#table');
             (0, _helper.cleanTable)();
-            document.getElementById("add_information").innerHTML = "";
             for (i = 0; i < json_size; i++) {
-              date_dif_milliseconds = Date.parse(json[i].inspired_date.split('T')[0]) - Date.now();
-              date_dif_days = date_dif_milliseconds / (1000 * 60 * 60 * 24);
-              $site.insertAdjacentHTML('beforeend', (0, _helper.toHTML)(json[i], date_dif_days));
-              if (date_dif_days < 30) {
-                (0, _helper.insertText)("\u0412\u043D\u0438\u043C\u0430\u043D\u0438\u0435! \u041B\u0438\u0446\u0435\u043D\u0437\u0438\u044F \u2116".concat(json[0].id, " \u0438\u0441\u0442\u0435\u043A\u0430\u0435\u0442 \u0447\u0435\u0440\u0435\u0437 ").concat(Math.floor(date_dif_days), " \u0434\u043D\u0435\u0439"));
-              }
+              $site.insertAdjacentHTML('beforeend', (0, _helper.toHTML)(json[i]));
             }
             alert('Data recieved!');
-            _context2.next = 18;
+            _context2.next = 17;
             break;
-          case 17:
+          case 16:
             alert("Ошибка HTTP: " + response.status);
-          case 18:
+          case 17:
           case "end":
             return _context2.stop();
         }
@@ -312,26 +312,55 @@ function _deleteLicense() {
   }));
   return _deleteLicense.apply(this, arguments);
 }
-},{"./helper.js":"helper.js"}],"index.js":[function(require,module,exports) {
+},{"./helper.js":"helper.js"}],"tabs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.showLicenseTab = showLicenseTab;
+exports.showUsersTab = showUsersTab;
+function showLicenseTab(event) {
+  document.getElementById('Users').style.display = "none";
+  document.getElementById('License').style.display = "block";
+  var tablinks = document.getElementsByClassName("tablinks");
+  for (var i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  event.currentTarget.className += " active";
+}
+function showUsersTab(event) {
+  document.getElementById('License').style.display = "none";
+  document.getElementById('Users').style.display = "block";
+  var tablinks = document.getElementsByClassName("tablinks");
+  for (var i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  event.currentTarget.className += " active";
+}
+},{}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _licenseController = require("./licenseController");
+var _tabs = require("./tabs");
 // while(true){
 //     let password = prompt('Введите пароль:', '')
 //     if ( password == '3322') {
 //         break
 //     } else alert('Неверный пароль!')
 // }
-
+var LicenseTab = document.querySelector('#LicenseTab');
+var UsersTab = document.querySelector('#UsersTab');
+LicenseTab.addEventListener("click", _tabs.showLicenseTab, false);
+UsersTab.addEventListener("click", _tabs.showUsersTab, false);
+document.getElementById('Users').style.display = "none";
 var sendLic = document.querySelector('#sendLicense');
 var getLic = document.querySelector('#getLicenses');
 var deleteLic = document.querySelector('#deleteLicense');
-var cleanTab = document.querySelector('#cleanTable');
 sendLic.addEventListener("click", _licenseController.sendLicense, false);
 getLic.addEventListener("click", _licenseController.getLicenses, false);
 deleteLic.addEventListener("click", _licenseController.deleteLicense, false);
-cleanTab.addEventListener("click", cleanTable, false);
-},{"./licenseController":"licenseController.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./licenseController":"licenseController.js","./tabs":"tabs.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -356,7 +385,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56010" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63739" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

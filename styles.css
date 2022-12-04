@@ -1,6 +1,25 @@
+body {
+  background-color: #7c77d829;
+}
+
+h6 {
+  color: white;
+  text-align: right;
+  font-size: 10px;
+}
+
+.tab.developed {
+  height: 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
 table, th, td {
-    border: 1px solid black;
+    border: 2px solid black;
     text-align: center;
+    padding: 5px 5px;
   }
   p     { display: table-row;  }
   label { display: table-cell; }
@@ -8,12 +27,66 @@ table, th, td {
     display: table-cell;
     width: 300px;
   }
-  .grid {
-    display: grid;
-    gap: 1rem;
-    grid-auto-flow: column;
-    margin: 0 0 1rem 0;
-  }
   .form {
     margin-left: 10px;
+  }
+  .tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: rgb(124, 119, 216);
+  }
+  
+  /* Style the buttons inside the tab */
+  .tab button {
+    background-color: rgb(124, 119, 216);
+    float: left;
+    border: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.5s;
+    font-size: 20px;
+    margin-top: 15px;
+  }
+  button {
+    background-color: rgb(124, 119, 216);
+    float: left;
+    border: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: 0.5s;
+    font-size: 17px;
+  }
+  
+  /* Change background color of buttons on hover */
+  button:hover {
+    background-color: rgb(84, 21, 220);
+  }
+
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color: rgb(84, 21, 220);
+  }
+  
+  .tabcontent.license {
+    transform: translateX(-150%);
+    animation: anil 0.5s forwards;
+  }
+  
+  @keyframes anil {
+    0% {transform: translateX(-150%);}
+    100% {transform: translateY(0);}
+  }
+  .tabcontent.users {
+    transform: translateX(+150%);
+    animation: aniu 0.5s forwards;
+  }
+  
+  @keyframes aniu {
+    0% {transform: translateX(+150%);}
+    100% {transform: translateY(0);}
   }

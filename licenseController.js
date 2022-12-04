@@ -18,6 +18,11 @@ export async function sendLicense() {
         recieved_date: recieved_date.value.toString(),
         user_id: 12
     }
+    if (!(title.value, lic_number.value, author.value, lic_owner.value, inspired_date.value, recieved_date.value))
+    {
+        alert('Заполните все поля!')
+        return
+    }
 
     console.log(JSON.stringify(license))
     let url = 'http://localhost:8888/api/license'
@@ -47,16 +52,8 @@ export async function getLicenses() {
         let json_size = json.length
         const $site = document.querySelector('#table')
         cleanTable()
-        
-        document.getElementById("add_information").innerHTML = ``
         for (let i=0; i<json_size; i++){
-            let date_dif_milliseconds = Date.parse(json[i].inspired_date.split('T')[0]) - Date.now()
-            let date_dif_days = date_dif_milliseconds / ( 1000 * 60 * 60 * 24)
-            $site.insertAdjacentHTML('beforeend', toHTML(json[i], date_dif_days))
-            if (date_dif_days < 30)
-            {
-                insertText(`Внимание! Лицензия №${json[0].id} истекает через ${Math.floor(date_dif_days)} дней`)
-            }
+            $site.insertAdjacentHTML('beforeend', toHTML(json[i]))
         }
         alert('Data recieved!')
     } else alert("Ошибка HTTP: " + response.status)

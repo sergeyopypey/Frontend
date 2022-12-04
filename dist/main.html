@@ -9,54 +9,56 @@
     <link rel="stylesheet" href="/styles.8986bff4.css">
 <script src="/styles.8986bff4.js"></script></head>
 <body>
+  <div class="tab developed">
+    <h6>Developed by Troshin Sergey</h6>
+  </div>
+  <div class="tab">
+    <button class="tablinks" id="LicenseTab">Лицензии</button>
+    <button class="tablinks" id="UsersTab">Пользователи</button>
+  </div>
+  <div id="License" class="tabcontent license">
     <div style="margin-left: 10px;">
-      <h2>СИП ГИ</h2>
+      <h2>СИП ГИ: Лицензии</h2>
     </div>
 
-    <form class="form" id="myForm">
-      <input type="file" id="inpFile"><br>
-      <button type="submit">Upload File</button>
-    </form>
-
-    <div class="grid">
-      <div class="form">
-        <form>
-          <p>
-            <label for="summary">Название:</label>
-            <input type="text" id="title"><br>
-          </p>
-          <p>
-            <label for="summary">Номер лицензии:</label>
-            <input type="number" id="lic_number"><br>
-          </p>
-          <p>
-            <label for="summary">Выдающий лицензию:</label>
-            <input type="text" id="author"><br>
-          </p>
-          <p>
-            <label for="summary">Владелец лицензии:</label>
-            <input type="text" id="lic_owner"><br>
-          </p>
-          <p>
-            <label for="summary">Дата истечения:</label>
-            <input type="date" id="inspired_date"><br>
-          </p>
-          <p>
-            <label for="summary">Дата получения:</label>
-            <input type="date" id="recieved_date"><br>
-          </p>
-        </form>
-        <button style="margin-top: 5px; width: 464px;" id="sendLicense">Отправить информацию о лицензии</button><br>
-      </div>
-      <div>
-        <button id="deleteLicense">Удалить лицензию с ID-шником:</button>
-        <input type="number" id="lic_id"><br>
-        <textarea style="margin-top: 7px; resize: none;" id="add_information" cols="73" rows="7"></textarea>
-      </div>
+    <div class="form">
+      <form>
+        <p>
+          <label for="summary">Название:</label>
+          <input type="text" id="title"><br>
+        </p>
+        <p>
+          <label for="summary">Номер лицензии:</label>
+          <input type="number" id="lic_number"><br>
+        </p>
+        <p>
+          <label for="summary">Выдающий лицензию:</label>
+          <input type="text" id="author"><br>
+        </p>
+        <p>
+          <label for="summary">Владелец лицензии:</label>
+          <select id="lic_owner" style="width: 300px;">
+            <option>Пункт 1</option>
+            <option>Пункт 2</option>
+          </select>            
+          <!-- <label for="summary">Владелец лицензии:</label>
+          <input type="text" id="lic_owner"/><br> -->
+        </p>
+        <p>
+          <label for="summary">Дата истечения:</label>
+          <input type="date" id="inspired_date"><br>
+        </p>
+        <p>
+          <label for="summary">Дата получения:</label>
+          <input type="date" id="recieved_date"><br>
+        </p>
+      </form>
+      <button style="margin-top: 5px; width: 464px;" id="sendLicense">Добавить лицензию</button>
+      <button style="margin-top: 5px;" id="getLicenses">Получить список лицензий</button>
+      <button style="margin: 5px 0px 0px 10px;" id="deleteLicense">Удалить лицензию с ID-шником:</button>
+      <input style="margin-top: 5px; width: 80px; height: 41.5px;" type="number" id="lic_id">
     </div>   
     <div>
-      <button style="margin-left: 10px;" id="getLicenses">Получить список лицензий</button>
-      <button id="cleanTable">Очистить таблицу</button>
       <table style="margin-top: 10px;" class="container-fluid" id="table">
         <tr>
           <th>ID</th>
@@ -72,7 +74,58 @@
         </tr>
       </table>
     </div>
-<h6 style="text-align: center; margin: 300px 0px 10px 0px;">Developed by Troshin Sergey</h6>
+  </div>
+  
+  
+  
+  
+  
+  
+  <div id="Users" class="tabcontent users">
+    <div style="margin-left: 10px;">
+      <h2>СИП ГИ: Пользователи</h2>
+    </div>
+
+    <div class="form">
+      <form>
+        <p>
+          <label for="summary">Фамилия</label>
+          <input type="text" id="second_name"><br>
+        </p>
+        <p>
+          <label for="summary">Имя</label>
+          <input type="text" id="first_name"><br>
+        </p>
+        <p>
+          <label for="summary">Отчество</label>
+          <input type="text" id="third_name"><br>
+        </p>
+        <p>
+          <label for="summary">Почта</label>
+          <input type="email" id="email"><br>
+        </p>
+        <p>
+          <label for="summary">Подразделение</label>
+          <input type="text" id="department"><br>
+        </p>
+      </form>
+      <button style="margin-top: 5px; width: 464px;" id="sendUser">Добавить пользователя</button>
+      <button style="margin-top: 5px;" id="getUsers">Получить список пользователей</button>
+      <button style="margin: 5px 0px 0px 10px;" id="deleteUser">Удалить пользователя с ID-шником:</button>
+      <input style="margin-top: 5px; width: 80px; height: 41.5px;" type="number" id="user_id">
+    </div>  
+    <div>
+      <table style="margin-top: 10px;" class="container-fluid" id="table">
+        <tr>
+          <th>ID</th>
+          <th>ФИО</th>
+          <th>Подразделение</th>
+          <th>Почта</th>
+          <th>Количество лицензий</th>
+        </tr>
+      </table>
+    </div>
+  </div>
 <script type="text/javascript" src="/Frontend.e31bb0bc.js"></script>
 </body>
 </html>
