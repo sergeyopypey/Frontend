@@ -1,24 +1,24 @@
-import {insertText, toHTML, cleanTable} from "./helper.js"
+import {toHTML, cleanTable, optionsUpdate} from "../helper.js"
 
 export async function sendLicense() {
-    
     let title = document.getElementById('title')
     let lic_number = document.getElementById('lic_number')
     let author = document.getElementById('author')
     let lic_owner = document.getElementById('lic_owner')
-    let inspired_date = document.getElementById('inspired_date')
+    let expiration_date = document.getElementById('expiration_date')
     let recieved_date = document.getElementById('recieved_date')
-    
+    var date = new Date()
     const license = {
         title: title.value,
         lic_number: lic_number.value,
         author: author.value,
         lic_owner: lic_owner.value,
-        inspired_date: inspired_date.value.toString(),
+        expiration_date: expiration_date.value.toString(),
         recieved_date: recieved_date.value.toString(),
-        user_id: 12
+        creating_date: date, 
+        user_id: 4
     }
-    if (!(title.value, lic_number.value, author.value, lic_owner.value, inspired_date.value, recieved_date.value))
+    if (!(title.value, lic_number.value, author.value, lic_owner.value, expiration_date.value, recieved_date.value))
     {
         alert('Заполните все поля!')
         return
@@ -33,6 +33,7 @@ export async function sendLicense() {
                 },
         body: JSON.stringify(license)
     })
+    optionsUpdate()
     if (response.ok) {
         let json = await response.json();
         console.log(json)
@@ -52,6 +53,7 @@ export async function getLicenses() {
         let json_size = json.length
         const $site = document.querySelector('#table')
         cleanTable()
+        optionsUpdate()
         for (let i=0; i<json_size; i++){
             $site.insertAdjacentHTML('beforeend', toHTML(json[i]))
         }
@@ -67,6 +69,7 @@ export async function deleteLicense() {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json;charset=utf-8'}
     })
+    optionsUpdate()
     if (response.ok) {
         let json = await response.json();
         console.log(json)

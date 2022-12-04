@@ -15,9 +15,21 @@ const sendLic = document.querySelector('#sendLicense')
 const getLic = document.querySelector('#getLicenses')
 const deleteLic = document.querySelector('#deleteLicense')
 
+const sendUs = document.querySelector('#sendUser')
+const getUs = document.querySelector('#getUsers')
+const deleteUs = document.querySelector('#deleteUser')
+
 sendLic.addEventListener("click", sendLicense, false)
 getLic.addEventListener("click", getLicenses, false)
 deleteLic.addEventListener("click", deleteLicense, false)
 
-import { deleteLicense, getLicenses, sendLicense } from "./licenseController"
+sendUs.addEventListener("click", sendUser, false)
+getUs.addEventListener("click", getUsers, false)
+deleteUs.addEventListener("click", deleteUser, false)
+
+import { deleteLicense, getLicenses, sendLicense } from "./Controllers/licenseController"
 import { showLicenseTab, showUsersTab } from "./tabs"
+import { sendUser, getUsers, deleteUser } from "./Controllers/userController"
+import { optionsUpdate } from "./helper"
+
+optionsUpdate()

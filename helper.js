@@ -1,6 +1,6 @@
 export function toHTML(json) {
-    var days = (Date.parse(json.inspired_date) - Date.now()) / (1000 * 60 * 60 * 24)
-    var inspired_date = new Date(json.inspired_date)
+    var days = (Date.parse(json.expiration_date) - Date.now()) / (1000 * 60 * 60 * 24)
+    var expiration_date = new Date(json.expiration_date)
     var recieved_date = new Date(json.recieved_date)
     return `
             <tr>
@@ -9,7 +9,7 @@ export function toHTML(json) {
                 <td>${json.lic_number}</td>
                 <td>${json.author}</td>
                 <td>${json.lic_owner}</td>
-                <td>${inspired_date.toLocaleDateString()}</td>
+                <td>${expiration_date.toLocaleDateString()}</td>
                 <td>${recieved_date.toLocaleDateString()}</td>
                 <td>${Math.floor(days)} дней</td>
                 <td>${json.user_id}</td>
@@ -21,5 +21,28 @@ export function cleanTable() {
     const list = document.getElementById("table");
     while (list.children[1]) {
     list.removeChild(list.lastChild);
+    }
+}
+
+export async function optionsUpdate() {
+    let url = 'http://localhost:8888/api/user'
+    let response = await fetch(url, {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json;charset=utf-8'}
+    })
+    if (response.ok) {
+        let json = await response.json();
+        console.log(json)
+        let json_size = json.length
+        const $site = document.querySelector('#lic_owner')
+        {
+            const list = document.getElementById("lic_owner");
+            while (list.children[0]) {
+            list.removeChild(list.lastChild);
+            }
+        }
+        for (let i=0; i<json_size; i++){
+            $site.insertAdjacentHTML('beforeend', `<option>${json[i].user_name}</option>`)
+        }
     }
 }

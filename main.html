@@ -13,7 +13,7 @@
     <h6>Developed by Troshin Sergey</h6>
   </div>
   <div class="tab">
-    <button class="tablinks" id="LicenseTab">Лицензии</button>
+    <button class="tablinks active" id="LicenseTab">Лицензии</button>
     <button class="tablinks" id="UsersTab">Пользователи</button>
   </div>
   <div id="License" class="tabcontent license">
@@ -38,15 +38,12 @@
         <p>
           <label for="summary">Владелец лицензии:</label>
           <select id="lic_owner" style="width: 300px;">
-            <option>Пункт 1</option>
-            <option>Пункт 2</option>
+            <option>????</option>
           </select>            
-          <!-- <label for="summary">Владелец лицензии:</label>
-          <input type="text" id="lic_owner"/><br> -->
         </p>
         <p>
           <label for="summary">Дата истечения:</label>
-          <input type="date" id="inspired_date"/><br>
+          <input type="date" id="expiration_date"/><br>
         </p>
         <p>
           <label for="summary">Дата получения:</label>
@@ -115,7 +112,7 @@
       <input  style="margin-top: 5px; width: 80px; height: 41.5px;" type="number" id="user_id"/>
     </div>  
     <div>
-      <table style="margin-top: 10px;" class="container-fluid" id="table">
+      <table style="margin-top: 10px;" class="container-fluid" id="tableusers">
         <tr>
           <th>ID</th>
           <th>ФИО</th>
