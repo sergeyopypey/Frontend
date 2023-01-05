@@ -1,4 +1,4 @@
-export function toHTML(json) {
+export function LicenseToHTML(json) {
     var days = (Date.parse(json.expiration_date) - Date.now()) / (1000 * 60 * 60 * 24)
     var expiration_date = new Date(json.expiration_date)
     var recieved_date = new Date(json.recieved_date)
@@ -17,6 +17,18 @@ export function toHTML(json) {
             </tr>`
 }
 
+export function UsersToHTML(json) {
+    return `
+        <tr>
+          <th>${json.id}</th>
+          <th>${json.user_name}</th>
+          <th>${json.department}</th>
+          <th>${json.email}</th>
+          <th>Количество лицензий</th>
+        </tr>
+     `
+}
+
 export function cleanTable() {
     const list = document.getElementById("table");
     while (list.children[1]) {
@@ -32,17 +44,25 @@ export async function optionsUpdate() {
     })
     if (response.ok) {
         let json = await response.json();
-        console.log(json)
+        //console.log(json)
         let json_size = json.length
         const $site = document.querySelector('#lic_owner')
         {
             const list = document.getElementById("lic_owner");
-            while (list.children[0]) {
+            while (list.children[1]) {
             list.removeChild(list.lastChild);
             }
         }
+        const users = new Map()
+        const usersNotSorted = []
         for (let i=0; i<json_size; i++){
-            $site.insertAdjacentHTML('beforeend', `<option>${json[i].user_name}</option>`)
+            usersNotSorted.push(json[i].user_name)
         }
+        const usersSorted = usersNotSorted.sort()   
+        for (let i=0; i<json_size; i++){
+            $site.insertAdjacentHTML('beforeend', `<option>${usersSorted[i]}</option>`)
+            users.set(json[i].user_name, json[i].id)
+        }
+        return users
     }
 }

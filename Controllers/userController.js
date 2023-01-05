@@ -1,14 +1,5 @@
-function toHTML(json) {
-    return `
-        <tr>
-          <th>${json.id}</th>
-          <th>${json.user_name}</th>
-          <th>${json.department}</th>
-          <th>${json.email}</th>
-          <th>Количество лицензий</th>
-        </tr>
-     `
-}
+import { UsersToHTML, optionsUpdate } from "../helper"
+
 
 export async function sendUser() {
     let second_name = document.getElementById('second_name')
@@ -45,6 +36,7 @@ export async function sendUser() {
         let json = await response.json();
         console.log(json)
         alert('Data sent!')
+        optionsUpdate()
     } else alert("Ошибка HTTP: " + response.status)
 }
 
@@ -66,9 +58,10 @@ export async function getUsers() {
             }
         }
         for (let i=0; i<json_size; i++){
-            $site.insertAdjacentHTML('beforeend', toHTML(json[i]))
+            $site.insertAdjacentHTML('beforeend', UsersToHTML(json[i]))
         }
         alert('Data recieved!')
+        optionsUpdate()
     } else alert("Ошибка HTTP: " + response.status)
 }
 
@@ -84,5 +77,6 @@ export async function deleteUser() {
         let json = await response.json();
         console.log(json)
         alert('Data deleted!')
+        optionsUpdate()
     } else alert("Ошибка HTTP: " + response.status)
 }
