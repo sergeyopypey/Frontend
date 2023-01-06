@@ -10,11 +10,6 @@ export async function sendLicense() {
     var date = new Date()
     let owner = lic_owner.value
     let user_id = await optionsUpdate()
-    if(!user_id.get(owner))
-    {
-        alert('Неверный владелец лицензии!')
-        return
-    }
     const license = {
         title: title.value,
         lic_number: lic_number.value,
@@ -30,7 +25,11 @@ export async function sendLicense() {
         alert('Заполните все поля!')
         return
     }
-
+    if(!user_id.get(owner))
+    {
+        alert('Неверный владелец лицензии!')
+        return
+    }
     console.log(JSON.stringify(license))
     let url = 'http://localhost:8888/api/license'
     let response = await fetch(url, {

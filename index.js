@@ -6,6 +6,11 @@
 // }
 const LicenseTab = document.querySelector('#LicenseTab')
 const UsersTab = document.querySelector('#UsersTab')
+
+const ShowTip = document.querySelector('#lic_owner')
+ShowTip.addEventListener("focusin", tipIn, false)
+ShowTip.addEventListener("focusout", tipOut, false)
+
 LicenseTab.addEventListener("click", showLicenseTab, false)
 UsersTab.addEventListener("click", showUsersTab, false)
 
@@ -27,8 +32,9 @@ sendUs.addEventListener("click", sendUser, false)
 getUs.addEventListener("click", getUsers, false)
 deleteUs.addEventListener("click", deleteUser, false)
 
+
 import { deleteLicense, getLicenses, sendLicense } from "./Controllers/licenseController"
-import { showLicenseTab, showUsersTab } from "./tabs"
+import { showLicenseTab, showUsersTab, tipIn, tipOut } from "./animation"
 import { sendUser, getUsers, deleteUser } from "./Controllers/userController"
 import { optionsUpdate } from "./helper"
 

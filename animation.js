@@ -19,3 +19,15 @@ export function showUsersTab(event) {
     }
     event.currentTarget.className += " active"
 }
+
+
+export function tipIn(){
+    document.getElementById('tip').style.display = "inline"
+    document.getElementById('tip').style.animation = "tipanimIn 1s"
+    addEventListener('animationend', (event) => {document.getElementById('tip').style.display = "inline"});
+}
+
+export function tipOut(){
+    document.getElementById('tip').style.animation = "tipanimOut 1s"
+    addEventListener('animationend', (event) => {document.getElementById('tip').style.display = "none"});
+}

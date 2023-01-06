@@ -36,10 +36,18 @@
           <input type="text" id="author"><br>
         </p>
         <p>
+          <!-- <div style="display: inline;">
           <label for="summary">Владелец лицензии:</label>
           <select id="lic_owner" style="width: 300px;">
             <option></option>
-          </select>            
+          </select>
+          Подсказка
+          </div> -->
+          <label for="summary">Владелец лицензии:</label>
+          <select id="lic_owner" style="width: 300px;">
+            <option></option>
+          </select>
+          <label id="tip" class="tip" style="display: none;">начните вводить имя</label>
         </p>
         <p>
           <label for="summary">Дата истечения:</label>

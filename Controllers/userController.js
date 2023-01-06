@@ -17,7 +17,7 @@ export async function sendUser() {
         creating_date: date,
         user_password: password
     }
-    if (!(second_name.value, first_name.value, third_name.value, email.value, department.value, password))
+    if (!(second_name.value, first_name.value, third_name.value, email.value, department.value, password.value))
     {
         alert('Заполните все поля пользователя!')
         return
