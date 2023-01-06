@@ -65,10 +65,15 @@ export async function getLicenses() {
     } else alert("Ошибка HTTP: " + response.status)
 }
 
-export async function deleteLicense() {
-    let lic_id = document.getElementById('lic_id')
-    confirm(`Confirm deleting License with ID=${lic_id.value}`)
-    let url = `http://localhost:8888/api/license/${lic_id.value}`
+
+
+export async function deleteLicense(id) {
+    let lic_id = parseInt(id)
+    if(!confirm(`Confirm deleting License with ID=${lic_id}`))
+    {
+        return
+    }
+    let url = `http://localhost:8888/api/license/${lic_id}`
     let response = await fetch(url, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json;charset=utf-8'}

@@ -17,7 +17,7 @@ export async function sendUser() {
         creating_date: date,
         user_password: password
     }
-    if (!(second_name.value, first_name.value, third_name.value, email.value, department.value, password.value))
+    if (!(second_name.value, first_name.value, third_name.value, email.value, department.value))
     {
         alert('Заполните все поля пользователя!')
         return
@@ -65,10 +65,10 @@ export async function getUsers() {
     } else alert("Ошибка HTTP: " + response.status)
 }
 
-export async function deleteUser() {
-    let user_id = document.getElementById('user_id')
-    confirm(`Confirm deleting User with ID=${user_id.value}`)
-    let url = `http://localhost:8888/api/user/${user_id.value}`
+export async function deleteUser(id) {
+    let user_id = parseInt(id)
+    confirm(`Confirm deleting User with ID=${user_id}`)
+    let url = `http://localhost:8888/api/user/${user_id}`
     let response = await fetch(url, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json;charset=utf-8'}

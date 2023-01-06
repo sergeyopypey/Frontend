@@ -135,10 +135,10 @@ function LicenseToHTML(json) {
   var days = (Date.parse(json.expiration_date) - Date.now()) / (1000 * 60 * 60 * 24);
   var expiration_date = new Date(json.expiration_date);
   var recieved_date = new Date(json.recieved_date);
-  return "\n            <tr>\n                <th>".concat(json.id, "</th>\n                <td>").concat(json.title, "</td>\n                <td>").concat(json.lic_number, "</td>\n                <td>").concat(json.author, "</td>\n                <td>").concat(json.lic_owner, "</td>\n                <td>").concat(expiration_date.toLocaleDateString(), "</td>\n                <td>").concat(recieved_date.toLocaleDateString(), "</td>\n                <td>").concat(Math.floor(days), " \u0434\u043D\u0435\u0439</td>\n                <td>").concat(json.user_id, "</td>\n                <td><input type=\"file\" id=\"avatar_").concat(json.id, "\" title=\" \" accept=\"image/png, image/jpeg\"></td>\n            </tr>");
+  return "\n            <tr>\n                <th>".concat(json.id, "</th>\n                <td>").concat(json.title, "</td>\n                <td>").concat(json.lic_number, "</td>\n                <td>").concat(json.author, "</td>\n                <td>").concat(json.lic_owner, "</td>\n                <td>").concat(expiration_date.toLocaleDateString(), "</td>\n                <td>").concat(recieved_date.toLocaleDateString(), "</td>\n                <td>").concat(Math.floor(days), " \u0434\u043D\u0435\u0439</td>\n                <td>").concat(json.user_id, "</td>\n                <td><input type=\"file\" id=\"avatar_").concat(json.id, "\" title=\" \" accept=\"image/png, image/jpeg\"></td>\n                <td><button class=\"deleteButton\" id=\"delete_").concat(json.id, "\">X</button></td>\n            </tr>");
 }
 function UsersToHTML(json) {
-  return "\n        <tr>\n          <th>".concat(json.id, "</th>\n          <th>").concat(json.user_name, "</th>\n          <th>").concat(json.department, "</th>\n          <th>").concat(json.email, "</th>\n          <th>\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043B\u0438\u0446\u0435\u043D\u0437\u0438\u0439</th>\n        </tr>\n     ");
+  return "\n        <tr>\n          <th>".concat(json.id, "</th>\n          <th>").concat(json.user_name, "</th>\n          <th>").concat(json.department, "</th>\n          <th>").concat(json.email, "</th>\n          <th>\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043B\u0438\u0446\u0435\u043D\u0437\u0438\u0439</th>\n          <td><button class=\"deleteButton\" id=\"delete_").concat(json.id, "\">X</button></td>\n        </tr>\n     ");
 }
 function cleanTable() {
   var list = document.getElementById("table");
@@ -345,43 +345,48 @@ function _getLicenses() {
   }));
   return _getLicenses.apply(this, arguments);
 }
-function deleteLicense() {
+function deleteLicense(_x) {
   return _deleteLicense.apply(this, arguments);
 }
 function _deleteLicense() {
-  _deleteLicense = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+  _deleteLicense = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(id) {
     var lic_id, url, response, json;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            lic_id = document.getElementById('lic_id');
-            confirm("Confirm deleting License with ID=".concat(lic_id.value));
-            url = "http://localhost:8888/api/license/".concat(lic_id.value);
-            _context3.next = 5;
+            lic_id = parseInt(id);
+            if (confirm("Confirm deleting License with ID=".concat(lic_id))) {
+              _context3.next = 3;
+              break;
+            }
+            return _context3.abrupt("return");
+          case 3:
+            url = "http://localhost:8888/api/license/".concat(lic_id);
+            _context3.next = 6;
             return fetch(url, {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json;charset=utf-8'
               }
             });
-          case 5:
+          case 6:
             response = _context3.sent;
             if (!response.ok) {
-              _context3.next = 14;
+              _context3.next = 15;
               break;
             }
-            _context3.next = 9;
+            _context3.next = 10;
             return response.json();
-          case 9:
+          case 10:
             json = _context3.sent;
             console.log(json);
             alert('Data deleted!');
-            _context3.next = 15;
+            _context3.next = 16;
             break;
-          case 14:
-            alert("Ошибка HTTP: " + response.status);
           case 15:
+            alert("Ошибка HTTP: " + response.status);
+          case 16:
           case "end":
             return _context3.stop();
         }
@@ -493,7 +498,7 @@ function _sendUser() {
               creating_date: date,
               user_password: password
             };
-            if (second_name.value, first_name.value, third_name.value, email.value, department.value, password.value) {
+            if (second_name.value, first_name.value, third_name.value, email.value, department.value) {
               _context.next = 12;
               break;
             }
@@ -589,19 +594,19 @@ function _getUsers() {
   }));
   return _getUsers.apply(this, arguments);
 }
-function deleteUser() {
+function deleteUser(_x) {
   return _deleteUser.apply(this, arguments);
 }
 function _deleteUser() {
-  _deleteUser = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+  _deleteUser = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(id) {
     var user_id, url, response, json;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            user_id = document.getElementById('user_id');
-            confirm("Confirm deleting User with ID=".concat(user_id.value));
-            url = "http://localhost:8888/api/user/".concat(user_id.value);
+            user_id = parseInt(id);
+            confirm("Confirm deleting User with ID=".concat(user_id));
+            url = "http://localhost:8888/api/user/".concat(user_id);
             _context3.next = 5;
             return fetch(url, {
               method: 'DELETE',
@@ -658,16 +663,26 @@ UsersTab.addEventListener("click", _animation.showUsersTab, false);
 document.getElementById('Users').style.display = "none";
 var sendLic = document.querySelector('#sendLicense');
 var getLic = document.querySelector('#getLicenses');
-var deleteLic = document.querySelector('#deleteLicense');
 var sendUs = document.querySelector('#sendUser');
 var getUs = document.querySelector('#getUsers');
-var deleteUs = document.querySelector('#deleteUser');
 sendLic.addEventListener("click", _licenseController.sendLicense, false);
 getLic.addEventListener("click", _licenseController.getLicenses, false);
-deleteLic.addEventListener("click", _licenseController.deleteLicense, false);
+document.getElementById("table").addEventListener("click", function (e) {
+  if (e.target && e.target.nodeName == "BUTTON") {
+    console.log("List item ", e.target.id, " was clicked!");
+    console.log(e.target.id.toString().split('_')[1]);
+    (0, _licenseController.deleteLicense)(e.target.id.toString().split('_')[1]);
+  }
+});
 sendUs.addEventListener("click", _userController.sendUser, false);
 getUs.addEventListener("click", _userController.getUsers, false);
-deleteUs.addEventListener("click", _userController.deleteUser, false);
+document.getElementById("tableusers").addEventListener("click", function (e) {
+  if (e.target && e.target.nodeName == "BUTTON") {
+    console.log("List item ", e.target.id, " was clicked!");
+    console.log(e.target.id.toString().split('_')[1]);
+    (0, _userController.deleteUser)(e.target.id.toString().split('_')[1]);
+  }
+});
 (0, _helper.optionsUpdate)();
 },{"./Controllers/licenseController":"Controllers/licenseController.js","./animation":"animation.js","./Controllers/userController":"Controllers/userController.js","./helper":"helper.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -694,7 +709,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59434" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63472" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

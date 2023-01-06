@@ -18,19 +18,31 @@ document.getElementById('Users').style.display = "none"
 
 const sendLic = document.querySelector('#sendLicense')
 const getLic = document.querySelector('#getLicenses')
-const deleteLic = document.querySelector('#deleteLicense')
 
 const sendUs = document.querySelector('#sendUser')
 const getUs = document.querySelector('#getUsers')
-const deleteUs = document.querySelector('#deleteUser')
 
 sendLic.addEventListener("click", sendLicense, false)
 getLic.addEventListener("click", getLicenses, false)
-deleteLic.addEventListener("click", deleteLicense, false)
+
+document.getElementById("table").addEventListener("click", function(e) {
+    if(e.target && e.target.nodeName == "BUTTON") {
+        console.log("List item ", e.target.id, " was clicked!");
+        console.log(e.target.id.toString().split('_')[1])
+        deleteLicense(e.target.id.toString().split('_')[1])
+    }
+});
 
 sendUs.addEventListener("click", sendUser, false)
 getUs.addEventListener("click", getUsers, false)
-deleteUs.addEventListener("click", deleteUser, false)
+
+document.getElementById("tableusers").addEventListener("click", function(e) {
+    if(e.target && e.target.nodeName == "BUTTON") {
+        console.log("List item ", e.target.id, " was clicked!");
+        console.log(e.target.id.toString().split('_')[1])
+        deleteUser(e.target.id.toString().split('_')[1])
+    }
+});
 
 
 import { deleteLicense, getLicenses, sendLicense } from "./Controllers/licenseController"
