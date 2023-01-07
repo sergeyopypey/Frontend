@@ -44,6 +44,7 @@ export async function sendLicense() {
         console.log(json)
         alert('Data sent!')
     } else alert("Ошибка HTTP: " + response.status)
+    getLicenses()
 }
 
 export async function getLicenses() {
@@ -61,7 +62,7 @@ export async function getLicenses() {
         for (let i=0; i<json_size; i++){
             $site.insertAdjacentHTML('beforeend', LicenseToHTML(json[i]))
         }
-        alert('Data recieved!')
+        console.log('Data recieved!')
     } else alert("Ошибка HTTP: " + response.status)
 }
 
@@ -83,4 +84,5 @@ export async function deleteLicense(id) {
         console.log(json)
         alert('Data deleted!')
     } else alert("Ошибка HTTP: " + response.status)
+    getLicenses()
 }

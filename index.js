@@ -4,9 +4,19 @@
 //         break
 //     } else alert('Неверный пароль!')
 // }
-const LicenseTab = document.querySelector('#LicenseTab')
-const UsersTab = document.querySelector('#UsersTab')
 
+// Уведомления на будущее
+// Notification.requestPermission().then(function (permission) {
+//     console.log(permission);
+// });
+// var title = "JavaScript Jeep";
+// var icon = 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png';
+// var body = "It's Your boarding time";
+// var notification = new Notification(title, { body, icon });
+// const LicenseTab = document.querySelector('#LicenseTab')
+// const UsersTab = document.querySelector('#UsersTab')
+
+getLicenses()
 const ShowTip = document.querySelector('#lic_owner')
 ShowTip.addEventListener("focusin", tipIn, false)
 ShowTip.addEventListener("focusout", tipOut, false)

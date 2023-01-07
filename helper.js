@@ -13,8 +13,8 @@ export function LicenseToHTML(json) {
                 <td>${recieved_date.toLocaleDateString()}</td>
                 <td>${Math.floor(days)} дней</td>
                 <td>${json.user_id}</td>
-                <td><input type="file" id="avatar_${json.id}" title=" " accept="image/png, image/jpeg"></td>
-                <td><button class="deleteButton" id="delete_${json.id}">X</button></td>
+                <th><input type="file" id="avatar_${json.id}" title=" " accept="image/png, image/jpeg"></th>
+                <th><button class="deleteButton" id="delete_${json.id}">X</button></th>
             </tr>`
 }
 
@@ -26,7 +26,7 @@ export function UsersToHTML(json) {
           <th>${json.department}</th>
           <th>${json.email}</th>
           <th>Количество лицензий</th>
-          <td><button class="deleteButton" id="delete_${json.id}">X</button></td>
+          <th><button class="deleteButton" id="delete_${json.id}">X</button></th>
         </tr>
      `
 }

@@ -1,4 +1,6 @@
 import { optionsUpdate } from "./helper"
+import { getLicenses } from "./Controllers/licenseController"
+import { getUsers } from "./Controllers/userController"
 
 export async function showLicenseTab(event) {
     optionsUpdate()
@@ -9,6 +11,7 @@ export async function showLicenseTab(event) {
     tablinks[i].className = tablinks[i].className.replace(" active", "")
     }
     event.currentTarget.className += " active"
+    getLicenses()
 }
 export function showUsersTab(event) {
     document.getElementById('License').style.display = "none"
@@ -18,6 +21,7 @@ export function showUsersTab(event) {
     tablinks[i].className = tablinks[i].className.replace(" active", "")
     }
     event.currentTarget.className += " active"
+    getUsers()
 }
 
 

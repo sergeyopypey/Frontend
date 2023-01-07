@@ -38,6 +38,7 @@ export async function sendUser() {
         alert('Data sent!')
         optionsUpdate()
     } else alert("Ошибка HTTP: " + response.status)
+    getUsers()
 }
 
 export async function getUsers() {
@@ -60,14 +61,23 @@ export async function getUsers() {
         for (let i=0; i<json_size; i++){
             $site.insertAdjacentHTML('beforeend', UsersToHTML(json[i]))
         }
-        alert('Data recieved!')
+        console.log('Data recieved!')
         optionsUpdate()
     } else alert("Ошибка HTTP: " + response.status)
 }
 
 export async function deleteUser(id) {
     let user_id = parseInt(id)
-    confirm(`Confirm deleting User with ID=${user_id}`)
+    if(!confirm(`Confirm deleting User with ID=${user_id}`))
+    {
+        return
+    }
+    let canYouDeleteItem = await checkOneuser(user_id)
+    if (canYouDeleteItem)
+    {
+        alert('Этот пользователь фигурирует в качестве владельца лицензии. Удаление запрещено!')
+        return
+    }
     let url = `http://localhost:8888/api/user/${user_id}`
     let response = await fetch(url, {
         method: 'DELETE',
@@ -79,4 +89,25 @@ export async function deleteUser(id) {
         alert('Data deleted!')
         optionsUpdate()
     } else alert("Ошибка HTTP: " + response.status)
+    getUsers()
+}
+
+export async function checkOneuser(id) {
+    let user_id = parseInt(id)
+    let url = `http://localhost:8888/api/user/${user_id}`
+    let response = await fetch(url, {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json;charset=utf-8'}
+    })
+    if (response.ok) {
+        let json = await response.json();
+        if (json.length && json.length > 0)
+        {
+            return true
+        } else return false
+    } else 
+    {
+        alert("Ошибка HTTP: " + response.status)
+        return false
+    }
 }
