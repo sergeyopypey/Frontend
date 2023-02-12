@@ -5,6 +5,7 @@ export async function sortBySummary() {
     const json = await getLicenses()
     console.log(json)
     console.log(json[1])
+    //Hello!
 
 }
 
