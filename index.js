@@ -53,6 +53,9 @@ document.getElementById("tableusers").addEventListener("click", function (e) {
     }
 });
 
+//Email
+document.querySelector('#sendEmail').addEventListener("click", sendEmail, false)
+
 //Sorting Licenses
 const sortBySummaryElement = document.querySelector('#sortBySummary')
 const sortByOwnerElement = document.querySelector('#sortByOwner')
@@ -68,4 +71,5 @@ import { showLicenseTab, showUsersTab, tipIn, tipOut, start } from "./animation"
 import { sendUser, getUsers, deleteUser } from "./Controllers/userController"
 import { optionsUpdate } from "./helper"
 import { sortByExpirationDate, sortByOwner, sortBySummary } from "./sorting"
+import { sendEmail } from "./mailHandler"
 optionsUpdate()

@@ -5,15 +5,13 @@ export function LicenseToHTML(json) {
     var expiration_date = new Date(json.expiration_date)
     var recieved_date = new Date(json.recieved_date)
     let color = "green"
-    if(between(days, 0, 30))
-    {
+    if (between(days, 0, 30)) {
         color = 'red'
-        sendEmail(days, json.user_id, false)
+        //sendEmail(days, json.user_id, false)
     }
-    if(between(days, 30, 60))
-    {
+    if (between(days, 30, 60)) {
         color = 'orange'
-        sendEmail(days, json.user_id, true)
+        //sendEmail(days, json.user_id, true)
     }
     return `
             <tr>
@@ -55,7 +53,7 @@ export async function optionsUpdate() {
     let url = 'http://localhost:8888/api/user'
     let response = await fetch(url, {
         method: 'GET',
-        headers: {'Content-Type': 'application/json;charset=utf-8'}
+        headers: { 'Content-Type': 'application/json;charset=utf-8' }
     })
     if (response.ok) {
         let json = await response.json();
@@ -65,16 +63,16 @@ export async function optionsUpdate() {
         {
             const list = document.getElementById("lic_owner");
             while (list.children[1]) {
-            list.removeChild(list.lastChild);
+                list.removeChild(list.lastChild);
             }
         }
         const users = new Map()
         const usersNotSorted = []
-        for (let i=0; i<json_size; i++){
+        for (let i = 0; i < json_size; i++) {
             usersNotSorted.push(json[i].user_name)
         }
-        const usersSorted = usersNotSorted.sort()   
-        for (let i=0; i<json_size; i++){
+        const usersSorted = usersNotSorted.sort()
+        for (let i = 0; i < json_size; i++) {
             $site.insertAdjacentHTML('beforeend', `<option>${usersSorted[i]}</option>`)
             users.set(json[i].user_name, json[i].id)
         }
@@ -82,7 +80,6 @@ export async function optionsUpdate() {
     }
 }
 
-function between(x, min, max)
-{
+function between(x, min, max) {
     return x >= min && x <= max
 }
