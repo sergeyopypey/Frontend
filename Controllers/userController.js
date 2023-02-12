@@ -35,7 +35,7 @@ export async function sendUser() {
     if (response.ok) {
         let json = await response.json();
         console.log(json)
-        alert('Data sent!')
+        //alert('Data sent!')
         optionsUpdate()
     } else alert("Ошибка HTTP: " + response.status)
     getUsers()
@@ -86,7 +86,7 @@ export async function deleteUser(id) {
     if (response.ok) {
         let json = await response.json();
         console.log(json)
-        alert('Data deleted!')
+        //alert('Data deleted!')
         optionsUpdate()
     } else alert("Ошибка HTTP: " + response.status)
     getUsers()

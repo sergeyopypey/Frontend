@@ -16,36 +16,35 @@
 // const LicenseTab = document.querySelector('#LicenseTab')
 // const UsersTab = document.querySelector('#UsersTab')
 
-getLicenses()
+start()
+
+//Managing tip "начните вводить имя"
 const ShowTip = document.querySelector('#lic_owner')
 ShowTip.addEventListener("focusin", tipIn, false)
 ShowTip.addEventListener("focusout", tipOut, false)
 
+//Managing TAB
 LicenseTab.addEventListener("click", showLicenseTab, false)
 UsersTab.addEventListener("click", showUsersTab, false)
-
 document.getElementById('Users').style.display = "none"
 
+//Sending objects
 const sendLic = document.querySelector('#sendLicense')
-const getLic = document.querySelector('#getLicenses')
-
 const sendUs = document.querySelector('#sendUser')
-const getUs = document.querySelector('#getUsers')
 
 sendLic.addEventListener("click", sendLicense, false)
-getLic.addEventListener("click", getLicenses, false)
+sendUs.addEventListener("click", sendUser, false)
 
-document.getElementById("table").addEventListener("click", function(e) {
-    if(e.target && e.target.nodeName == "BUTTON") {
+//Deleting licenses
+document.getElementById("tablelicense").addEventListener("click", function(e) {
+    if(e.target && e.target.nodeName == "BUTTON" && e.target.className == 'deleteButton') {
         console.log("List item ", e.target.id, " was clicked!");
         console.log(e.target.id.toString().split('_')[1])
         deleteLicense(e.target.id.toString().split('_')[1])
     }
 });
 
-sendUs.addEventListener("click", sendUser, false)
-getUs.addEventListener("click", getUsers, false)
-
+//Deleting users
 document.getElementById("tableusers").addEventListener("click", function(e) {
     if(e.target && e.target.nodeName == "BUTTON") {
         console.log("List item ", e.target.id, " was clicked!");
@@ -54,10 +53,19 @@ document.getElementById("tableusers").addEventListener("click", function(e) {
     }
 });
 
+//Sorting Licenses
+const sortBySummaryElement = document.querySelector('#sortBySummary')
+const sortByOwnerElement = document.querySelector('#sortByOwner')
+const sortByExpirationDateElement = document.querySelector('#sortByExpirationDate')
 
-import { deleteLicense, getLicenses, sendLicense } from "./Controllers/licenseController"
-import { showLicenseTab, showUsersTab, tipIn, tipOut } from "./animation"
+sortBySummaryElement.addEventListener("click", sortBySummary, false)
+sortByOwnerElement.addEventListener("click", sortByOwner, false)
+sortByExpirationDateElement.addEventListener("click", sortByExpirationDate, false)
+
+//Importing functions
+import { deleteLicense, getLicenses, sendLicense, insertLicense } from "./Controllers/licenseController"
+import { showLicenseTab, showUsersTab, tipIn, tipOut, start } from "./animation"
 import { sendUser, getUsers, deleteUser } from "./Controllers/userController"
 import { optionsUpdate } from "./helper"
-
+import { sortByExpirationDate, sortByOwner, sortBySummary } from "./sorting"
 optionsUpdate()

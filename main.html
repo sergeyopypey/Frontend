@@ -35,13 +35,6 @@
           <input type="text" id="author"/><br>
         </p>
         <p>
-          <!-- <div style="display: inline;">
-          <label for="summary">Владелец лицензии:</label>
-          <select id="lic_owner" style="width: 300px;">
-            <option></option>
-          </select>
-          Подсказка
-          </div> -->
           <label for="summary">Владелец лицензии:</label>
           <select id="lic_owner" style="width: 300px;">
             <option></option>
@@ -49,31 +42,30 @@
           <label id="tip" class="tip" style="display: none;">начните вводить имя</label>
         </p>
         <p>
-          <label for="summary">Дата истечения:</label>
-          <input type="date" id="expiration_date"/><br>
-        </p>
-        <p>
           <label for="summary">Дата получения:</label>
           <input type="date" id="recieved_date"/><br>
         </p>
+        <p>
+          <label for="summary">Дата истечения:</label>
+          <input type="date" id="expiration_date"/><br>
+        </p>
       </form>
       <button style="margin: 5px 0px 5px 0px; width: 464px;" id="sendLicense">Добавить лицензию</button>
-      <button style="position: absolute; right: 0px; margin: 5px 5px 5px 0px;" id="getLicenses">Обновить</button>
       <!-- <button style="margin: 5px 0px 0px 10px;" id="deleteLicense">Удалить лицензию с ID-шником:</button>
       <input  style="margin-top: 5px; width: 80px; height: 41.5px;" type="number" id="lic_id"/> -->
     </div>   
     <div>
-      <table style="margin-top: 10px;" class="container-fluid" id="table">
-        <tr>
+      <table style="margin-top: 10px;" class="container-fluid" id="tablelicense">
+        <tr style="padding: 0px;" class="headrow">
           <th>ID</th>
-          <th>Название</th>
+          <th><button id="sortBySummary">Название</button></th>
           <th>Номер лицензии</th>
           <th>Выдающий лицензию</th>
-          <th>Владелец лицензии</th>
-          <th>Дата истечения</th>
+          <th><button id="sortByOwner">Владелец лицензии</button></th>
           <th>Дата получения</th>
-          <th>Время действия</th>
-          <th>Пользователь</th>
+          <th><button id="sortByExpirationDate">Дата истечения</button></th>
+          <th>До истечения</th>
+          <!-- <th>Пользователь</th> -->
           <th>Файл</th>
           <th>DEL</th>
         </tr>
@@ -111,13 +103,12 @@
         </p>
       </form>
       <button style="margin: 5px 0px 5px 0px; width: 464px;" id="sendUser">Добавить пользователя</button>
-      <button style="position: absolute; right: 0px; margin: 5px 5px 5px 0px;" id="getUsers">Обновить</button>
       <!-- <button style="margin: 5px 0px 0px 10px;" id="deleteUser">Удалить пользователя с ID-шником:</button>
       <input  style="margin-top: 5px; width: 80px; height: 41.5px;" type="number" id="user_id"/> -->
     </div>  
     <div>
       <table style="margin-top: 10px;" class="container-fluid" id="tableusers">
-        <tr>
+        <tr class="headrow">
           <th>ID</th>
           <th>ФИО</th>
           <th>Подразделение</th>

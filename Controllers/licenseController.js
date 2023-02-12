@@ -42,9 +42,10 @@ export async function sendLicense() {
     if (response.ok) {
         let json = await response.json();
         console.log(json)
-        alert('Data sent!')
+        //alert('Data sent!')
     } else alert("Ошибка HTTP: " + response.status)
-    getLicenses()
+    const json = await getLicenses()
+    insertLicense(json)
 }
 
 export async function getLicenses() {
@@ -56,14 +57,18 @@ export async function getLicenses() {
     if (response.ok) {
         let json = await response.json();
         console.log(json)
-        let json_size = json.length
-        const $site = document.querySelector('#table')
-        cleanTable()
-        for (let i=0; i<json_size; i++){
-            $site.insertAdjacentHTML('beforeend', LicenseToHTML(json[i]))
-        }
-        console.log('Data recieved!')
+        return json
     } else alert("Ошибка HTTP: " + response.status)
+}
+
+export function insertLicense(json)
+{
+    let json_size = json.length
+    const $site = document.querySelector('#tablelicense')
+    cleanTable()
+    for (let i=0; i<json_size; i++){
+        $site.insertAdjacentHTML('beforeend', LicenseToHTML(json[i]))
+    }
 }
 
 
@@ -82,7 +87,8 @@ export async function deleteLicense(id) {
     if (response.ok) {
         let json = await response.json();
         console.log(json)
-        alert('Data deleted!')
+        //alert('Data deleted!')
     } else alert("Ошибка HTTP: " + response.status)
-    getLicenses()
+    const json = await getLicenses()
+    insertLicense(json)
 }
