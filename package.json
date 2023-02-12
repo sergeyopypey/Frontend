@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "parcel ./main.html -p 4200 --open",
-    "start": "node C:\\Users\\19020\\Desktop/JS-PostgreeSQL/index.js"
+    "start": "node C:\\Users\\Sergey\\Desktop/JS-PostgreeSQL/index.js"
   },
   "author": "",
   "license": "ISC",
