@@ -726,17 +726,37 @@ function start() {
 } //Show tab "Лицензии"
 function _start() {
   _start = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var json;
+    var mainbody, loginform, json;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
+            mainbody = document.getElementById('mainbody');
+            mainbody.style.filter = "blur(4px)";
+            mainbody.style.pointerEvents = "none";
+            loginform = document.querySelector('#loginform');
+            loginform.addEventListener("keypress", function (event) {
+              if (event.key === "Enter") {
+                console.log("Enter pressed");
+                var userLogin = document.getElementById('user_login').value;
+                var userPassword = document.getElementById('user_password').value;
+                console.log(userLogin, userPassword);
+                loginform.style.display = "none";
+                document.getElementById('mainbody').style.pointerEvents = "none";
+                mainbody.style.pointerEvents = "";
+                mainbody.style.filter = "";
+                if (userLogin != 'admin' || userPassword != 'admin') {
+                  var usersTab = document.getElementById('UsersTab');
+                  usersTab.style.pointerEvents = "none";
+                }
+              }
+            });
+            _context.next = 7;
             return (0, _licenseController.getLicenses)();
-          case 2:
+          case 7:
             json = _context.sent;
             (0, _licenseController.insertLicense)(json);
-          case 4:
+          case 9:
           case "end":
             return _context.stop();
         }

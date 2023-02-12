@@ -4,6 +4,28 @@ import { getUsers } from "./Controllers/userController"
 
 //Load information on first start
 export async function start() {
+    let mainbody = document.getElementById('mainbody')
+    mainbody.style.filter = "blur(4px)"
+    mainbody.style.pointerEvents = "none"
+
+    let loginform = document.querySelector('#loginform')
+    loginform.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            console.log("Enter pressed");
+            const userLogin = document.getElementById('user_login').value
+            const userPassword = document.getElementById('user_password').value
+            console.log(userLogin, userPassword)
+            loginform.style.display = "none"
+            document.getElementById('mainbody').style.pointerEvents = "none"
+            mainbody.style.pointerEvents = ""
+            mainbody.style.filter = ""
+            if (userLogin != 'admin' || userPassword != 'admin') {
+                let usersTab = document.getElementById('UsersTab')
+                usersTab.style.pointerEvents = "none"
+            }
+        }
+    });
+
     const json = await getLicenses()
     insertLicense(json)
 }

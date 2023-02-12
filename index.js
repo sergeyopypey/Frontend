@@ -36,8 +36,8 @@ sendLic.addEventListener("click", sendLicense, false)
 sendUs.addEventListener("click", sendUser, false)
 
 //Deleting licenses
-document.getElementById("tablelicense").addEventListener("click", function(e) {
-    if(e.target && e.target.nodeName == "BUTTON" && e.target.className == 'deleteButton') {
+document.getElementById("tablelicense").addEventListener("click", function (e) {
+    if (e.target && e.target.nodeName == "BUTTON" && e.target.className == 'deleteButton') {
         console.log("List item ", e.target.id, " was clicked!");
         console.log(e.target.id.toString().split('_')[1])
         deleteLicense(e.target.id.toString().split('_')[1])
@@ -45,8 +45,8 @@ document.getElementById("tablelicense").addEventListener("click", function(e) {
 });
 
 //Deleting users
-document.getElementById("tableusers").addEventListener("click", function(e) {
-    if(e.target && e.target.nodeName == "BUTTON") {
+document.getElementById("tableusers").addEventListener("click", function (e) {
+    if (e.target && e.target.nodeName == "BUTTON") {
         console.log("List item ", e.target.id, " was clicked!");
         console.log(e.target.id.toString().split('_')[1])
         deleteUser(e.target.id.toString().split('_')[1])
