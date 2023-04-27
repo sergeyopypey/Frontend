@@ -17,8 +17,7 @@ export async function sendUser() {
         creating_date: date,
         user_password: password
     }
-    if (!(second_name.value, first_name.value, third_name.value, email.value, department.value))
-    {
+    if (!(second_name.value, first_name.value, third_name.value, email.value, department.value)) {
         alert('Заполните все поля пользователя!')
         return
     }
@@ -28,8 +27,8 @@ export async function sendUser() {
     let response = await fetch(url, {
         method: 'POST',
         headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
+            'Content-Type': 'application/json;charset=utf-8'
+        },
         body: JSON.stringify(user)
     })
     if (response.ok) {
@@ -45,7 +44,7 @@ export async function getUsers() {
     let url = 'http://localhost:8888/api/user'
     let response = await fetch(url, {
         method: 'GET',
-        headers: {'Content-Type': 'application/json;charset=utf-8'}
+        headers: { 'Content-Type': 'application/json;charset=utf-8' }
     })
     if (response.ok) {
         let json = await response.json();
@@ -55,10 +54,10 @@ export async function getUsers() {
         {
             const list = document.getElementById("tableusers");
             while (list.children[1]) {
-            list.removeChild(list.lastChild);
+                list.removeChild(list.lastChild);
             }
         }
-        for (let i=0; i<json_size; i++){
+        for (let i = 0; i < json_size; i++) {
             $site.insertAdjacentHTML('beforeend', UsersToHTML(json[i]))
         }
         console.log('Data recieved!')
@@ -68,20 +67,18 @@ export async function getUsers() {
 
 export async function deleteUser(id) {
     let user_id = parseInt(id)
-    if(!confirm(`Confirm deleting User with ID=${user_id}`))
-    {
+    if (!confirm(`Confirm deleting User with ID=${user_id}`)) {
         return
     }
     let canYouDeleteItem = await checkOneuser(user_id)
-    if (canYouDeleteItem)
-    {
+    if (canYouDeleteItem) {
         alert('Этот пользователь фигурирует в качестве владельца лицензии. Удаление запрещено!')
         return
     }
     let url = `http://localhost:8888/api/user/${user_id}`
     let response = await fetch(url, {
         method: 'DELETE',
-        headers: {'Content-Type': 'application/json;charset=utf-8'}
+        headers: { 'Content-Type': 'application/json;charset=utf-8' }
     })
     if (response.ok) {
         let json = await response.json();
@@ -97,17 +94,10 @@ export async function checkOneuser(id) {
     let url = `http://localhost:8888/api/user/${user_id}`
     let response = await fetch(url, {
         method: 'GET',
-        headers: {'Content-Type': 'application/json;charset=utf-8'}
+        headers: { 'Content-Type': 'application/json;charset=utf-8' }
     })
     if (response.ok) {
         let json = await response.json();
-        if (json.length && json.length > 0)
-        {
-            return true
-        } else return false
-    } else 
-    {
-        alert("Ошибка HTTP: " + response.status)
-        return false
-    }
+        return json
+    } else alert("Ошибка HTTP: " + response.status)
 }

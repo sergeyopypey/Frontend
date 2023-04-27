@@ -1,5 +1,6 @@
 body {
   background-color: #7c77d829;
+  margin: 0px;
 }
 
 h6 {
@@ -8,12 +9,17 @@ h6 {
   font-size: 10px;
 }
 
+table {
+  width: 100%;
+}
+
 table,
 th,
 td {
-  border: 2px solid black;
+  border: 1px solid black;
   text-align: center;
   padding: 0px 0px;
+  border-collapse: collapse;
 }
 
 p {
@@ -25,7 +31,8 @@ label {
   font-weight: bold;
 }
 
-input {
+input,
+select {
   display: table-cell;
   width: 300px;
 }
@@ -47,7 +54,7 @@ button {
   display: inline;
   float: right;
   margin: -50px 0px;
-  height: 65px;
+  height: 70px;
   width: 100px;
   background-image: linear-gradient(to left, rgb(255, 255, 255) 10%, rgb(108 172 228) 25%, rgb(2 94 161) 50%, rgb(0 50 116) 100%);
 }
@@ -65,9 +72,10 @@ button {
 
 .tab {
   overflow: hidden;
-  border: 1px solid #ccc;
   background-color: rgb(0 50 116);
-  height: 75px;
+  width: 100%;
+  position: fixed;
+  left: 0;
 }
 
 /* Style the buttons inside the tab */
@@ -78,10 +86,11 @@ button {
   outline: none;
   color: white;
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 20px 16px;
   transition: 0.5s;
   font-size: 20px;
-  margin-top: 15px;
+  margin-top: 0px;
+  height: 65px;
 }
 
 .headrow button {
@@ -89,6 +98,7 @@ button {
   height: 100%;
   font-weight: bold;
 }
+
 
 .deleteButton {
   width: 100%;
@@ -136,6 +146,13 @@ button:hover {
 /* Create an active/current tablink class */
 button.active {
   background-color: rgb(108 172 228);
+}
+
+.tabcontent {
+  top: 70px;
+  position: fixed;
+  left: 0;
+  width: 100%;
 }
 
 .tabcontent.license {

@@ -5,7 +5,7 @@ export function LicenseToHTML(json) {
     var expiration_date = new Date(json.expiration_date)
     var recieved_date = new Date(json.recieved_date)
     let color = "green"
-    if (between(days, 0, 30)) {
+    if (between(days, 0, 30) || days < 0) {
         color = 'red'
         //sendEmail(days, json.user_id, false)
     }

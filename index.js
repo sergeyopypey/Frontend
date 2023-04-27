@@ -9,13 +9,12 @@
 // Notification.requestPermission().then(function (permission) {
 //     console.log(permission);
 // });
-// var title = "JavaScript Jeep";
+// var title = "Hello, Sergey!";
 // var icon = 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png';
 // var body = "It's Your boarding time";
 // var notification = new Notification(title, { body, icon });
 // const LicenseTab = document.querySelector('#LicenseTab')
 // const UsersTab = document.querySelector('#UsersTab')
-
 start()
 
 //Managing tip "начните вводить имя"
@@ -54,7 +53,12 @@ document.getElementById("tableusers").addEventListener("click", function (e) {
 });
 
 //Email
-document.querySelector('#sendEmail').addEventListener("click", sendEmail, false)
+//document.querySelector('#sendEmail').addEventListener("click", sendEmail, false)
+//sendEmail('19.02.02@mail.ru')
+
+setInterval(function () {
+    searchForExpiration()
+}, 5000)
 
 //Sorting Licenses
 const sortBySummaryElement = document.querySelector('#sortBySummary')
@@ -68,8 +72,8 @@ sortByExpirationDateElement.addEventListener("click", sortByExpirationDate, fals
 //Importing functions
 import { deleteLicense, getLicenses, sendLicense, insertLicense } from "./Controllers/licenseController"
 import { showLicenseTab, showUsersTab, tipIn, tipOut, start } from "./animation"
-import { sendUser, getUsers, deleteUser } from "./Controllers/userController"
+import { sendUser, getUsers, deleteUser, checkOneuser } from "./Controllers/userController"
 import { optionsUpdate } from "./helper"
 import { sortByExpirationDate, sortByOwner, sortBySummary } from "./sorting"
-import { sendEmail } from "./mailHandler"
+import { sendEmail, searchForExpiration } from "./mailHandler"
 optionsUpdate()
